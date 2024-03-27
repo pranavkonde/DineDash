@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { IconButton, InputAdornment, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
+import "./style.css";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -18,6 +20,13 @@ import axios from "axios";
 export default function Login() {
   const [alert, setAlert] = useState(0);
   const navigate = useNavigate();
+  // show password
+const [showPassword, setShowPassword] = useState(false);
+const [passwordError, setPasswordError] = useState("");
+
+const handleClickShowPassword = () => {
+ setShowPassword(!showPassword);
+};
 
   const messages = {
     400: ["error", "Required * fields can't be empty"],
@@ -78,20 +87,18 @@ export default function Login() {
 
   return (
     <>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" className="container">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 3,
+            marginTop: 10,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
+         
+          <Typography component="h1" variant="h4">
             Log In
           </Typography>
           <br></br>
@@ -130,24 +137,47 @@ export default function Login() {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
+              <TextField
+                required
+                fullWidth
+                name='password'
+                label='Password'
+                type={showPassword ? "text" : "password"}
+                id='password'
+                autoComplete='new-password'
+                error={!!passwordError} // Display error if password is invalid
+                helperText={passwordError}
+                InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                }}
                 />
               </Grid>
             </Grid>
             <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+            type="submit"
+            fullWidth
+            variant="contained"
+            className="loginButton"
+            sx={{
+              mt: 3,
+              mb: 2,
+              backgroundColor: '#fc8019', 
+              '&:hover': {
+                backgroundColor: '#fc8019', 
+              },
+           }}
             >
-              Log In
+            Log In
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
@@ -161,7 +191,7 @@ export default function Login() {
               </Grid>
 
               <Grid item>
-                <Link href="/user/forgotPassword" variant="body3">
+                <Link href="/user/forgotPassword" variant="body3" className="link">
                   Forgot Password?
                 </Link>
               </Grid>
