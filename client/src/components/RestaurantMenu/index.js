@@ -33,31 +33,36 @@ const RestaurantMenu = () => {
     <Shimmer />
  ) : (
     <div className="restaurantPage">
-      <div className="resataurantDetails">
+      
         <h1>{restaurantDetails.name}</h1>
-        <p>{restaurantDetails.id}</p>
-        <img
+        {/* <img
           src={IMAGE_URL + restaurantDetails.cloudinaryImageId}
           alt={restaurantDetails.name + " image"}
-        />
-      </div>
+          
+        /> */}
+        
+      
       <div className="resataurantMenu">
-        <ol>
+        <ol className="">
           {restaurantMenu?.map((menu) => {
             return (
-              <li key={menu?.id}>
-                <h2>{menu?.name}</h2>
-                <p>{menu?.description}</p>
-                <p>Price: ₹{menu?.price / 100}</p>
-                <p>Veg: {menu?.isVeg ? "Yes" : "No"}</p>
-                <img
-                 src={IMAGE_URL + menu?.imageId}
-                 alt={menu?.name + " image"}
-                 style={{ width: '100px', height: '100px' }}
-                />
-                {/* Step 3: Button in Each Menu Item */}
-                <button onClick={() => addToCart(menu)}>Add to Cart</button>
-              </li>
+              <li className="row">
+                <div className="col-md-6">
+                 <h2>{menu?.name}</h2>
+                 <p>{menu?.description}</p>
+                 <p>Price: ₹{menu?.price / 100}</p>
+                 <p>Veg: {menu?.isVeg ? "Yes" : "No"}</p>
+                 </div>
+                 <div className="col-md-6">
+                 <img
+                   src={IMAGE_URL + menu?.imageId}
+                   alt={menu?.name + " image"}
+                   style={{ width: '200px', height: '200px', marginRight: '10px' }}
+                 />
+
+                 <button style={{ width: '50px', height: '25px' }} onClick={() => addToCart(menu)}>ADD</button>
+                 </div>
+             </li>
             );
           })}
         </ol>

@@ -73,9 +73,9 @@ const Header = () => {
       logo: biCart,
     },
     {
-      id: "signin",
+      id: "signout",
       href: "/user/signin",
-      text: "Sign In",
+      text: "Sign Out",
       logo: biSignin,
     },
     {
@@ -105,9 +105,7 @@ const Header = () => {
       <header className='header'>
         <div className='global-navbar'>
           <div className='home-nav'>
-            <a href='/' title='Food Villa' className='logo-anchor'>
-              <img src={Logo} alt='Food Villa' />
-            </a>
+            <h3>DineDash</h3>
             <ul className='nav-links'>
               {navLinks.map((navLink) => {
                 return (

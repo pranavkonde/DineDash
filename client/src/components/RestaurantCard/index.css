@@ -1,5 +1,6 @@
 .Restaurant {
   margin: 10px;
+  margin-top: 20px;
   padding: 10px;
   box-sizing: inherit;
   border-radius: 20px;
@@ -18,7 +19,9 @@
 .contentDiv {
   width: 250px;
   height: 100px;
+  
 }
+
 
 .Restaurant > div > img {
   width: 100%;
