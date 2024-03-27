@@ -80,7 +80,7 @@ const Header = () => {
     },
     {
       id: "help",
-      href: "/profile",
+      href: "/user/profile",
       text: "Profile",
       logo: biProfile,
     },

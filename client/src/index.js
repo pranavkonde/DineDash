@@ -18,6 +18,7 @@ import Cancel from "./components/Payment/Cancel";
 import StripePayment from "./components/Payment";
 import ForgotPassword from "./pages/forgot password";
 import ResetPassword from "./pages/reset password";
+import UpdateProfile from "./components/Profile";
 
 
 const appRouter = createBrowserRouter([
@@ -75,6 +76,10 @@ const appRouter = createBrowserRouter([
   {
     path:"/user/resetPassword",
     element:<ResetPassword/>
+  },
+  {
+    path:"/user/profile",
+    element:<UpdateProfile/>
   }
   
 

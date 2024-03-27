@@ -51,7 +51,7 @@ export default function ResetPassword() {
     console.log("token",resetPasswordDataObj.token)
 
     axios
-      .post(`http://localhost:5500/user/resetPassword?token=${resetPasswordDataObj.token}`, resetPasswordDataObj, {
+      .post("http://localhost:5500/user/resetPassword", resetPasswordDataObj, {
         withCredentials: true,
       })
       .then(function (res) {
