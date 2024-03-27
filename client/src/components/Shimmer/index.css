@@ -1,0 +1,48 @@
+.Restaurants {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 100%;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.shimmer-card {
+  margin: 10px;
+  padding: 10px;
+  box-sizing: inherit;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.shimmer-image {
+  object-fit: cover;
+  border-radius: 20px;
+  width: 250px;
+  height: 200px;
+  background-color: rgb(241, 240, 240);
+}
+
+.shimmer-search {
+  width: 75%;
+  height: 40px;
+  margin: 20px auto 0 auto;
+  border-radius: 5px;
+  background-color: rgb(241, 240, 240);
+}
+
+.shimmer-text {
+  width: 230px;
+  height: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  background-color: rgb(241, 240, 240);
+}
+
+.shimmer-headline {
+  width: 200px;
+  height: 25px;
+  border-radius: 5px;
+  margin: 5px;
+  background-color: rgb(241, 240, 240);
+}

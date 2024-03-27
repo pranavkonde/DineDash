@@ -1,0 +1,146 @@
+.header {
+  box-shadow: 0 15px 40px -20px rgba(40, 44, 63, 0.15);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: #fff;
+  z-index: 1000;
+  will-change: transform;
+  transform: translateZ(0);
+  transition: transform 0.3s ease;
+  contain: size layout style;
+  padding: 0 20px;
+}
+
+.home-nav {
+  max-width: 1200px;
+  min-width: 1200px;
+  position: relative;
+  margin: 0 auto;
+  height: 80px;
+  background: #fff;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  stroke: currentColor;
+  fill: #fc8019;
+  stroke-width: 0;
+}
+
+.logo-anchor {
+  display: block;
+  height: 49px;
+  transition: transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  margin-right: 16px;
+}
+
+.nav-links {
+  -ms-flex: 1;
+  flex: 1;
+  min-width: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
+  height: 100%;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.nav-link {
+  margin-right: 60px;
+  color: #3d4152;
+  font-size: 16px;
+  font-weight: 500 !important;
+}
+.nav-link:first-child {
+  margin-right: 0;
+}
+
+.nav-link > div {
+  position: relative;
+  height: 80px;
+  cursor: pointer;
+}
+.nav-link > div > button {
+  all: unset;
+}
+.nav-link > div > a,
+.nav-link > div,
+.nav-link > div > button {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-left: 28px;
+}
+
+.nav-link > div > a,
+.nav-link > div > button {
+  height: 100% !important;
+  margin-left: -28px;
+  color: inherit;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+a,
+a:focus,
+a:hover,
+a:visited {
+  text-decoration: none !important;
+}
+
+a {
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.nav-link-logo {
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  line-height: 0;
+}
+
+.nav-link:hover {
+  color: #fc8019 !important;
+}
+
+._1GTCc {
+  position: relative;
+  stroke: currentColor;
+  fill: #3d4152;
+  stroke-width: 0;
+}
+
+._2MSid {
+  fill: #fff;
+  stroke-width: 2px;
+  stroke: #282c3f;
+}
+
+._2vS77 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: 600;
+}

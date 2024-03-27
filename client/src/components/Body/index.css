@@ -1,0 +1,38 @@
+.searchDiv {
+  width: 70%;
+  height: 48px;
+  text-align: center;
+  border: 1px solid rgba(40, 44, 63, 0.3);
+  border-radius: 3px;
+  display: flex;
+  background-color: white;
+  margin: 20px auto 0 auto;
+  padding-right: 15px;
+  align-items: center;
+}
+
+.searchDiv > input {
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px 0px 0px 10px;
+  border-width: 0px;
+  outline: 0px;
+  appearance: auto;
+  box-sizing: border-box;
+  font-size: 1.15rem;
+  line-height: 24px;
+  font-family: inherit;
+  color: inherit;
+  background: inherit;
+  vertical-align: middle;
+  font-weight: 500;
+}
+
+.Restaurants {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 100%;
+  width: 1200px;
+  margin: 0 auto;
+}
