@@ -13,24 +13,24 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 export default function ResetPassword() {
- const [alert, setAlert] = useState(0);
- const navigate = useNavigate();
+  const [alert, setAlert] = useState(0);
+  const navigate = useNavigate();
 
- const messages = {
+  const messages = {
     400: ["error", "All fields are required"],
     200: ["success", "Password reset successful. Redirecting to login..."],
     404: ["error", "Invalid or expired reset token."],
     500: ["error", "Internal Server error!"],
- };
+  };
 
- const onAlertClosed = () => {
+  const onAlertClosed = () => {
     setAlert(0);
- };
+  };
 
- function handleSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -45,21 +45,25 @@ export default function ResetPassword() {
     const resetPasswordDataObj = {
       password: data.get("password"),
       confirmPassword: data.get("confirmPassword"),
-      token: new URLSearchParams(window.location.search).get('token'),
+      token: new URLSearchParams(window.location.search).get("token"),
     };
 
-    console.log("token",resetPasswordDataObj.token)
+    console.log("token", resetPasswordDataObj.token);
 
     axios
-      .post("http://localhost:5500/user/resetPassword", resetPasswordDataObj, {
-        withCredentials: true,
-      })
+      .post(
+        `http://localhost:5500/user/resetPassword?token=${resetPasswordDataObj.token}`,
+        resetPasswordDataObj,
+        {
+          withCredentials: true,
+        }
+      )
       .then(function (res) {
         setAlert(res.status);
         if (res.status === 200) {
           setTimeout(function () {
             onAlertClosed();
-            navigate("/user/login");
+            navigate("/user/signin");
           }, 3000);
         }
       })
@@ -67,15 +71,14 @@ export default function ResetPassword() {
         const status = err.response ? err.response.status : 500;
         setAlert(status);
         setTimeout(function () {
-           onAlertClosed();
+          onAlertClosed();
         }, 3000);
-       });
-       
- }
+      });
+  }
 
- return (
+  return (
     <>
-      <Container component="main" maxWidth="xs">
+      <Container component='main' maxWidth='xs'>
         <CssBaseline />
         <Box
           sx={{
@@ -88,7 +91,7 @@ export default function ResetPassword() {
           <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component='h1' variant='h5'>
             Reset Password
           </Typography>
           <br></br>
@@ -96,12 +99,12 @@ export default function ResetPassword() {
             {alert ? (
               <>
                 <Alert
-                 severity={messages[alert][0]}
-                 variant="filled"
-                 onClose={onAlertClosed}
+                  severity={messages[alert][0]}
+                  variant='filled'
+                  onClose={onAlertClosed}
                 >
-                 {" "}
-                 {messages[alert][1]}{" "}
+                  {" "}
+                  {messages[alert][1]}{" "}
                 </Alert>
                 <br></br>
               </>
@@ -110,7 +113,7 @@ export default function ResetPassword() {
             )}
           </Box>
           <Box
-            component="form"
+            component='form'
             noValidate
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
@@ -118,39 +121,39 @@ export default function ResetPassword() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                 required
-                 fullWidth
-                 id="password"
-                 label="New Password"
-                 name="password"
-                 type="password"
-                 autoComplete="new-password"
+                  required
+                  fullWidth
+                  id='password'
+                  label='New Password'
+                  name='password'
+                  type='password'
+                  autoComplete='new-password'
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                 required
-                 fullWidth
-                 name="confirmPassword"
-                 label="Confirm New Password"
-                 type="password"
-                 id="confirmPassword"
-                 autoComplete="new-password"
+                  required
+                  fullWidth
+                  name='confirmPassword'
+                  label='Confirm New Password'
+                  type='password'
+                  id='confirmPassword'
+                  autoComplete='new-password'
                 />
               </Grid>
             </Grid>
             <Button
-              type="submit"
+              type='submit'
               fullWidth
-              variant="contained"
+              variant='contained'
               sx={{ mt: 3, mb: 2 }}
             >
               Reset Password
             </Button>
-            <Grid container justifyContent="flex-end">
+            <Grid container justifyContent='flex-end'>
               <Grid item>
-                <Link href="/user/login" variant="body2">
-                 Back to Log In
+                <Link href='/user/signin' variant='body2'>
+                  Back to Log In
                 </Link>
               </Grid>
             </Grid>
@@ -158,5 +161,5 @@ export default function ResetPassword() {
         </Box>
       </Container>
     </>
- );
+  );
 }
