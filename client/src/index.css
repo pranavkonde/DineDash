@@ -1,0 +1,54 @@
+html {
+  box-sizing: border-box;
+  font-family: arial, Helvetica Neue, sans-serif;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  -moz-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-weight: 300;
+  color: #282c3f;
+}
+
+body {
+  margin: 0;
+}
+
+@font-face {
+  font-family: ProximaNova;
+  font-weight: 500;
+  src: url("https://res.cloudinary.com/swiggy/raw/upload/FontAssets/ux3/500.woff2")
+      format("woff2"),
+    url("https://res.cloudinary.com/swiggy/raw/upload/FontAssets/ux3/500.woff")
+      format("woff"),
+    url("https://res.cloudinary.com/swiggy/raw/upload/FontAssets/ux3/500.ttf")
+      format("truetype");
+}
+
+.fonts-loaded {
+  font-family: ProximaNova, arial, Helvetica Neue, sans-serif;
+  letter-spacing: 0;
+}
+
+#root {
+  height: 100%;
+}
+
+*,
+:after,
+:before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: transparent;
+  -ms-text-size-adjust: none;
+  outline: none;
+}

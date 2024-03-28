@@ -1,0 +1,38 @@
+{
+  "name": "food-ordering-app",
+  "version": "1.0.0",
+  "description": "A Food Ordering App like Swiggy",
+  "source": "./public/index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Piyush Vyawahare",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/packager-raw-url": "^2.9.3",
+    "@parcel/transformer-webmanifest": "^2.9.3",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "buffer": "^6.0.3",
+    "parcel": "^2.9.3",
+    "parcel-bundler": "^1.12.5",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.14",
+    "@mui/material": "^5.15.14",
+    "@stripe/react-stripe-js": "^2.6.2",
+    "@stripe/stripe-js": "^3.1.0",
+    "axios": "^1.6.8",
+    "bootstrap": "^5.3.3",
+    "formik": "^2.4.2",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.10.2",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.10.1",
+    "react-router-dom": "^6.22.3"
+  }
+}

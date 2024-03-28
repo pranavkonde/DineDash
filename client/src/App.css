@@ -1,0 +1,19 @@
+.main {
+  position: relative;
+  padding-top: 80px;
+  min-height: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 1240px;
+}
+
+article,
+aside,
+footer,
+header,
+nav,
+section {
+  display: block;
+}
