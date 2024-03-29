@@ -6,8 +6,7 @@ const db = require("./database/index");
 const userRouter = require("./routers/user");
 const restaurantRouter = require("./routers/restaurants");
 const paymentRouter= require("./routers/payment")
-// const vehicleRouter = require("./routers/vehicle");
-// const parkingRouter = require("./routers/parking");
+const cartRouter = require("./routers/cart")
 
 var app = express();
 
@@ -36,6 +35,7 @@ db.init();
 app.use("/user", userRouter)
 app.use("/restaurants", restaurantRouter)
 app.use("/",paymentRouter)
+app.use('/cart', cartRouter);
 
 app.listen(process.env.PORT, function () {
   console.log(`server is runing on port ${process.env.PORT}`);
