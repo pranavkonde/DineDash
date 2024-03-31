@@ -62,10 +62,8 @@ userRouter.get("/authenticate", authorization, function (req, res) {
   const obj = {
     userId: req.userId,
     email: req.email,
-    full_name: req.full_name,
-    phone_no: req.phone_no,
-    address: req.address,
   };
+
   res.status(200).json(obj);
 });
 
@@ -78,9 +76,7 @@ userRouter.post("/register", function (req, res) {
   // Validate full_name (no numbers)
   const fullNameRegex = /^[A-Za-z]+(?: [A-Za-z]+)?$/;
   if (!fullNameRegex.test(full_name)) {
-    return res
-      .status(400)
-      .json({ message: "Invalid Full name." });
+    return res.status(400).json({ message: "Invalid Full name." });
   }
 
   // Validate email (no spaces, valid format)
@@ -95,13 +91,13 @@ userRouter.post("/register", function (req, res) {
   const phoneNoRegex = /^[6-9]\d{9}$/;
   if (!phoneNoRegex.test(phone_no)) {
     return res.status(400).json({
-      message:
-        "Invalid Phone Number.",
+      message: "Invalid Phone Number.",
     });
   }
 
   // Validate password (at least one special character, one number, length <= 8)
-  const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+  const passwordRegex =
+    /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
   if (!passwordRegex.test(password)) {
     return res.status(400).json({
       message:
@@ -160,7 +156,8 @@ userRouter.post("/verify", function (req, res) {
 
   if (!userId || !otp) {
     return res.status(400).json({
-      message: "UserId and should not contain spaces and must be in a valid format.",
+      message:
+        "UserId and should not contain spaces and must be in a valid format.",
     });
   }
 
@@ -189,8 +186,8 @@ userRouter.post("/verify", function (req, res) {
           });
       } else {
         res.status(404).json({
-                message: "User Already Verified",
-              });
+          message: "User Already Verified",
+        });
       }
     })
     .catch(function (err) {
@@ -230,7 +227,8 @@ userRouter.post("/login", function (req, res) {
   }
 
   // Validate password (at least one special character, one number, length <= 8)
-  const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+  const passwordRegex =
+    /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
   if (!passwordRegex.test(password)) {
     return res.status(400).json({
       message:
@@ -281,8 +279,9 @@ userRouter.post("/login", function (req, res) {
               res.status(401).json({
                 message: "User Not Verified",
               });
+            }
           }
-      });
+        );
       }
     })
     .catch((err) => {
@@ -291,7 +290,7 @@ userRouter.post("/login", function (req, res) {
     });
 });
 
-userRouter.get("/logout", authorization, function (req, res) {
+userRouter.get("/logout", function (req, res) {
   res.clearCookie("token");
   res.status(200).end();
 });
@@ -351,7 +350,7 @@ userRouter.post("/resetPassword", async (req, res) => {
     const { password, confirmPassword, token } = req.body;
 
     const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
-  
+
     if (!password || !confirmPassword) {
       return res.status(400).json({ message: "All fields are required" });
     }

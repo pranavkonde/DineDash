@@ -11,15 +11,14 @@ import VerifyUser from "./pages/verifyUser";
 import Login from "./pages/login";
 import CheckoutForm from "./components/Payment";
 import Cart from "./components/Cart";
-import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import Success from "./components/Payment/Success";
 import Cancel from "./components/Payment/Cancel";
 import StripePayment from "./components/Payment";
 import ForgotPassword from "./pages/forgot password";
 import ResetPassword from "./pages/reset password";
 import UpdateProfile from "./components/Profile";
-
 
 const appRouter = createBrowserRouter([
   {
@@ -39,50 +38,48 @@ const appRouter = createBrowserRouter([
         path: "/restaurants/:id",
         element: <RestaurantMenu />,
       },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
     ],
   },
   {
     path: "/user/signin",
-    element: <Login />
+    element: <Login />,
   },
   {
     path: "/user/register",
-    element: <Register />
+    element: <Register />,
   },
   {
     path: "/user/verify",
-    element: <VerifyUser />
+    element: <VerifyUser />,
   },
   {
     path: "/payment",
-    element: <StripePayment />
-  },
-  {
-    path: "/cart",
-    element: <Cart />
+    element: <StripePayment />,
   },
   {
     path: "/success",
-    element:<Success/>
+    element: <Success />,
   },
   {
     path: "/cancel",
-    element:<Cancel/>
+    element: <Cancel />,
   },
   {
-    path:"/user/forgotPassword",
-    element:<ForgotPassword/>
+    path: "/user/forgotPassword",
+    element: <ForgotPassword />,
   },
   {
-    path:"/user/resetPassword",
-    element:<ResetPassword/>
+    path: "/user/resetPassword",
+    element: <ResetPassword />,
   },
   {
-    path:"/user/profile",
-    element:<UpdateProfile/>
-  }
-  
-
+    path: "/user/profile",
+    element: <UpdateProfile />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

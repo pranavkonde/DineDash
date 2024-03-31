@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Logo from "../../assets/svg/logo.svg";
 import { Link } from "react-router-dom";
 import Login from "../Login";
 
 import "./index.css";
+import UserContext from "../../utils/UserContext";
+import axios from "axios";
+import CartContext from "../../utils/CartContext";
 
 const Header = () => {
+  const { cart, setCart } = useContext(CartContext);
+
   // const biOffer = (
   //   <svg
   //     className='_1GTCc'
@@ -61,7 +66,7 @@ const Header = () => {
       >
         <path d='M4.438 0l-2.598 5.11-1.84 26.124h34.909l-1.906-26.124-2.597-5.11z'></path>
       </svg>
-      <span className='_2vS77'>0</span>
+      <span className='_2vS77'>{cart?.items?.length}</span>
     </span>
   );
 
@@ -71,12 +76,6 @@ const Header = () => {
       href: "/cart",
       text: "Cart",
       logo: biCart,
-    },
-    {
-      id: "signout",
-      href: "/user/signin",
-      text: "Sign Out",
-      logo: biSignin,
     },
     {
       id: "help",
@@ -100,6 +99,19 @@ const Header = () => {
 
   const [loginClicked, setLoginClicked] = useState(false);
 
+  const user = useContext(UserContext);
+
+  const handleLogOut = async () => {
+    axios
+      .get("http://localhost:5500/user/logout", { withCredentials: true })
+      .then((res) => {
+        window.location.href = "/";
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <header className='header'>
@@ -107,18 +119,39 @@ const Header = () => {
           <div className='home-nav'>
             <h3>DineDash</h3>
             <ul className='nav-links'>
-              {navLinks.map((navLink) => {
-                return (
-                  <li className='nav-link' key={navLink.id}>
-                    <div>
-                        <Link to={navLink.href}>
-                          <span className='nav-link-logo'>{navLink.logo}</span>
-                          <span>{navLink.text}</span>
-                        </Link>
+              {!user ? (
+                <li className='nav-link' key='signin'>
+                  <div>
+                    <Link to='/user/signin'>
+                      <span className='nav-link-logo'>{biSignin}</span>
+                      <span>Sign In</span>
+                    </Link>
+                  </div>
+                </li>
+              ) : (
+                <>
+                  {navLinks.map((navLink) => {
+                    return (
+                      <li className='nav-link' key={navLink.id}>
+                        <div>
+                          <Link to={navLink.href}>
+                            <span className='nav-link-logo'>
+                              {navLink.logo}
+                            </span>
+                            <span>{navLink.text}</span>
+                          </Link>
+                        </div>
+                      </li>
+                    );
+                  })}
+                  <li className='nav-link' key='signout'>
+                    <div onClick={handleLogOut}>
+                      <span className='nav-link-logo'>{biSignin}</span>
+                      <span>Sign Out</span>
                     </div>
                   </li>
-                );
-              })}
+                </>
+              )}
             </ul>
           </div>
         </div>
