@@ -4,7 +4,7 @@ import UserContext from "../../utils/UserContext";
 
 const UpdateUserDetails = () => {
   const user1 = useContext(UserContext);
-
+  console.log("1", user1);
   const [user, setUser] = useState({
     full_name: "",
     address: "",
@@ -13,16 +13,20 @@ const UpdateUserDetails = () => {
   });
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5500/user/${user1?.userId}`)
-      .then((response) => {
-        const { password, ...userData } = response.data;
-        console.log("userID", userData.userId);
-        setUser(userData);
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error);
-      });
+    if (user1) {
+      axios
+        .get(`http://localhost:5500/user/user/${user1?.userId}`, {
+          withCredentials: true,
+        })
+        .then((response) => {
+          const { password, ...userData } = response.data;
+          console.log("userID", userData._id);
+          setUser(userData);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+        });
+    }
   }, []);
 
   const handleChange = (e) => {

@@ -60,6 +60,20 @@ cartRouter.delete("/clearCart/:userId", async (req, res) => {
   res.status(200).send(cart);
 });
 
+cartRouter.post("/removeFromCart", async (req, res) => {
+  const { menuId, userId } = req.body;
+
+  const cart = await cartModel.findOne({ userId: userId });
+  if (!cart) return res.status(404).json({ message: "Cart not found" });
+
+  cart.items = cart.items.filter((item) => item.id.toString() !== menuId);
+
+  await cart.save();
+
+  if (!cart) return res.status(404).send("Cart not found");
+  res.status(200).json({ message: "Item removed from cart" });
+});
+
 // Update an item in the cart
 cartRouter.put("/cart/:cartId/items/:itemIndex", async (req, res) => {
   const { cartId, itemIndex } = req.params;

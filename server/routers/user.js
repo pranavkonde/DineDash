@@ -303,7 +303,7 @@ userRouter.get("/logout", function (req, res) {
   res.status(200).end();
 });
 
-userRouter.get("/:userId", async (req, res) => {
+userRouter.get("/user/:userId", async (req, res) => {
   const { userId } = req.params;
   const user = await userModel.findById(userId);
   if (!user) res.status(400).end();

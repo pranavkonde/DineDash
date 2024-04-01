@@ -14,18 +14,18 @@ const Cart = () => {
     0
   );
 
-  const removeFromCart = (menuItem, restaurantId) => {
-    setCart([...cart, menuItem]);
+  const removeFromCart = (menuId) => {
+    console.log(menuId);
     axios
       .post(
-        "http://localhost:5500/cart/removeFromCart",
-        { menu: menuItem, restaurantId: restaurantId, userId: user.userId },
+        "http://localhost:5500/cart/removeFromCart/",
+        { menuId: menuId, userId: user?.userId },
         {
           withCredentials: true,
         }
       )
       .then((res) => {
-        console.log(res?.data);
+        setCart(res?.data);
       })
       .catch((err) => {
         console.log(err);
@@ -79,7 +79,7 @@ const Cart = () => {
 
                   <button
                     style={{ width: "50px", height: "25px" }}
-                    onClick={() => removeFromCart(menu, restaurantDetails._id)}
+                    onClick={() => removeFromCart(menu.id)}
                   >
                     Remove
                   </button>
