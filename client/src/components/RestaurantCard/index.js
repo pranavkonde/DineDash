@@ -12,7 +12,6 @@ const RestaurantCard = ({ cloudinaryImageId, name, cuisines, avgRating }) => {
         {name}            
         </h4>
         <h4 style={{ fontFamily: 'San Serif',fontSize:'15px' }}>
-        {name}
           {cuisines?.length > 4
             ? cuisines?.slice(0, 4).join(", ")
             : cuisines?.join(", ")}

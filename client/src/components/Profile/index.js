@@ -10,10 +10,11 @@ const UpdateUserDetails = ({ userId }) => {
  });
 
  useEffect(() => {
-    // Fetch the current user's information when the component mounts
-    axios.get(`/api/users/${userId}`)
+    axios.get(`/users/${userId}`)
       .then(response => {
-        setUser(response.data);
+        const { password, ...userData } = response.data;
+        console.log("userID", userData.userId);
+        setUser(userData);
       })
       .catch(error => {
         console.error('Error fetching user data:', error);
@@ -29,8 +30,9 @@ const UpdateUserDetails = ({ userId }) => {
     e.preventDefault();
     axios.put(`http://localhost:5500/user/profile/${userId}`, user)
       .then(response => {
+        const { userId } = response.data;
+        console.log("UserId", userId);
         alert('User details updated successfully');
-        // Optionally, redirect or update the UI to reflect the changes
       })
       .catch(error => {
         console.error('Error updating user details:', error);
@@ -38,9 +40,40 @@ const UpdateUserDetails = ({ userId }) => {
       });
  };
 
+ const formStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '300px',
+    margin: '0 auto',
+    padding: '20px',
+    border: '1px solid #ccc',
+    borderRadius: '5px',
+    backgroundColor: '#f8f8f8'
+ };
+
+ const labelStyle = {
+    marginBottom: '10px'
+ };
+
+ const inputStyle = {
+    padding: '10px',
+    marginBottom: '20px',
+    borderRadius: '5px',
+    border: '1px solid #ccc'
+ };
+
+ const buttonStyle = {
+    padding: '4px 8px',
+    borderRadius: '5px',
+    border: 'none',
+    backgroundColor: '#fc8019',
+    color: '#fff',
+    cursor: 'pointer'
+ };
+
  return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <form onSubmit={handleSubmit} style={formStyle}>
+      <label style={labelStyle}>
         Full Name:
         <input
           type="text"
@@ -48,18 +81,21 @@ const UpdateUserDetails = ({ userId }) => {
           value={user.full_name}
           onChange={handleChange}
           required
+          style={inputStyle}
+          readOnly
         />
       </label>
-      <label>
+      <label style={labelStyle}>
         Address:
         <input
           type="text"
           name="address"
           value={user.address}
           onChange={handleChange}
+          style={inputStyle}
         />
       </label>
-      <label>
+      <label style={labelStyle}>
         Email:
         <input
           type="email"
@@ -67,9 +103,11 @@ const UpdateUserDetails = ({ userId }) => {
           value={user.email}
           onChange={handleChange}
           required
+          style={inputStyle}
+          readOnly
         />
       </label>
-      <label>
+      <label style={labelStyle}>
         Phone Number:
         <input
           type="text"
@@ -77,9 +115,11 @@ const UpdateUserDetails = ({ userId }) => {
           value={user.phone_no}
           onChange={handleChange}
           required
+          style={inputStyle}
+          readOnly
         />
       </label>
-      <button type="submit">Update Details</button>
+      <button type="submit" style={buttonStyle}>Update</button>
     </form>
  );
 };

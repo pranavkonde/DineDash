@@ -26,24 +26,30 @@ export default function Register() {
   const [phoneError, setPhoneError] = useState(""); // Added state for phone number validation error
    // Email validation regex
    const [emailError, setEmailError] = useState("");
- const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+ const emailRegex = /^[a-zA-Z0-9.]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
  const [fullNameError, setFullNameError] = useState("");
  const [passwordError, setPasswordError] = useState("");
 
  // Full name validation regex
- const fullNameRegex = /^[A-Za-z]+$/;
+ const fullNameRegex = /^[A-Za-z][A-Za-z\s]*$/;
 
  // Password validation regex
  const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
  
  // show password
 const [showPassword, setShowPassword] = useState(false);
+const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
 const handleClickShowPassword = () => {
  setShowPassword(!showPassword);
 };
 
+ 
+const handleClickShowConfirmPassword = () => {
+  setShowConfirmPassword(!showConfirmPassword);
+ };
  
   const navigate = useNavigate();
 
@@ -60,7 +66,7 @@ const handleClickShowPassword = () => {
   };
   const handlePhoneChange = (event) => {
     const phoneNumber = event.target.value;
-    const phoneRegex = /^\d{10}$/;
+    const phoneRegex = /^[6-9]\d{9}$/;
     if (!phoneRegex.test(phoneNumber)) {
       setPhoneError("Invalid phone number format");
     } else {
@@ -71,6 +77,14 @@ const handleClickShowPassword = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+     // Validate confirm password
+ if (data.get("password") !== data.get("cpassword")) {
+  setConfirmPasswordError("Passwords do not match");
+  return; // Stop the form submission if the passwords do not match
+} else {
+  setConfirmPasswordError(""); // Clear the error message if the passwords match
+}
+    
     if (!emailRegex.test(data.get("email"))) {
       setEmailError("Email is not valid"); // Update email error state
       return; // Stop the form submission if the email is invalid
@@ -78,7 +92,7 @@ const handleClickShowPassword = () => {
 
      // Validate full name format using the regex
      if (!fullNameRegex.test(data.get("full_name"))) {
-      setFullNameError("Full name must be a single word without spaces");
+      setFullNameError("Invalid full name");
       return;
     }
 
@@ -104,13 +118,13 @@ const handleClickShowPassword = () => {
       return;
     }
 
-    // if (data.get("password") !== data.get("cpassword")) {
-    //   setAlert(409);
-    //   setTimeout(function () {
-    //     onAlertClosed();
-    //   }, 3000);
-    //   return;
-    // }
+    if (data.get("password") !== data.get("cpassword")) {
+      setAlert(409);
+      setTimeout(function () {
+        onAlertClosed();
+      }, 3000);
+      return;
+    }
 
     const registerDataObj = {
       email: data.get("email"),
@@ -244,17 +258,31 @@ const handleClickShowPassword = () => {
                 />
 
               </Grid>
-              {/* <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name='cpassword'
-                  label='Confirm Password'
-                  type='password'
-                  id='cpassword'
-                  autoComplete='new-password'
-                />
-              </Grid> */}
+              <Grid item xs={12}>
+ <TextField
+    required
+    fullWidth
+    name='cpassword'
+    label='Confirm Password'
+    type={showConfirmPassword ? "text" : "password"}
+    id='cpassword'
+    autoComplete='new-password'
+    error={!!confirmPasswordError}
+    InputProps={{
+      endAdornment: (
+        <InputAdornment position="end">
+          <IconButton
+            aria-label="toggle confirm password visibility"
+            onClick={handleClickShowConfirmPassword}
+            edge="end"
+          >
+            {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+          </IconButton>
+        </InputAdornment>
+      ),
+    }}
+ />
+</Grid>
             </Grid>
             <Button
               type='submit'
