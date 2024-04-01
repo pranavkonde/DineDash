@@ -117,7 +117,9 @@ const Header = () => {
       <header className='header'>
         <div className='global-navbar'>
           <div className='home-nav'>
-            <h3>DineDash</h3>
+            <Link to='/'>
+              <h3>DineDash</h3>
+            </Link>
             <ul className='nav-links'>
               {!user ? (
                 <li className='nav-link' key='signin'>
@@ -156,7 +158,6 @@ const Header = () => {
           </div>
         </div>
       </header>
-      {console.log(loginClicked ? "true" : "false")}
       {loginClicked ? <Login l={setLoginClicked} /> : <></>}
     </>
   );

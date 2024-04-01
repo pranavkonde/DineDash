@@ -31,7 +31,6 @@ const App = () => {
           withCredentials: true,
         })
         .then((res) => {
-          console.log(res?.data);
           setCart(res?.data);
         })
         .catch((err) => {

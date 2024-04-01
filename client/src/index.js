@@ -42,6 +42,10 @@ const appRouter = createBrowserRouter([
         path: "/cart",
         element: <Cart />,
       },
+      {
+        path: "/user/profile",
+        element: <UpdateProfile />,
+      },
     ],
   },
   {
@@ -57,7 +61,7 @@ const appRouter = createBrowserRouter([
     element: <VerifyUser />,
   },
   {
-    path: "/payment",
+    path: "/payment/:price",
     element: <StripePayment />,
   },
   {
@@ -75,10 +79,6 @@ const appRouter = createBrowserRouter([
   {
     path: "/user/resetPassword",
     element: <ResetPassword />,
-  },
-  {
-    path: "/user/profile",
-    element: <UpdateProfile />,
   },
 ]);
 

@@ -67,6 +67,21 @@ userRouter.get("/authenticate", authorization, function (req, res) {
   res.status(200).json(obj);
 });
 
+userRouter.get("/:userId", async (req, res) => {
+  const { userId } = req.params;
+  const user = await userModel.findById(userId);
+  if (!user) res.status(400).end();
+  res.status(200).send(user);
+});
+
+userRouter.put("/updateProfile/:userId", async (req, res) => {
+  const { userId } = req.params;
+  const userDetails = req.body;
+  const user = await userModel.findByIdAndUpdate(userId, userDetails);
+  if (!user) res.status(400).end();
+  res.status(200).send(user);
+});
+
 userRouter.post("/register", function (req, res) {
   let full_name = req.body.full_name;
   let email = req.body.email;
