@@ -67,13 +67,6 @@ userRouter.get("/authenticate", authorization, function (req, res) {
   res.status(200).json(obj);
 });
 
-userRouter.get("/:userId", async (req, res) => {
-  const { userId } = req.params;
-  const user = await userModel.findById(userId);
-  if (!user) res.status(400).end();
-  res.status(200).send(user);
-});
-
 userRouter.put("/updateProfile/:userId", async (req, res) => {
   const { userId } = req.params;
   const userDetails = req.body;
@@ -310,26 +303,11 @@ userRouter.get("/logout", function (req, res) {
   res.status(200).end();
 });
 
-userRouter.get("/:id", authorization, (req, res) => {
-  const userId = req.params.id;
-
-  userModel
-    .findOne({ _id: userId })
-    .then((user) => {
-      if (user._id) {
-        res.status(200).send(user);
-      } else {
-        res
-          .status(400)
-          .send({ error: "Can't find user with provided user I'd" });
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(400).end({
-        error: "Something went wrong while finding user with provided user I'd",
-      });
-    });
+userRouter.get("/:userId", async (req, res) => {
+  const { userId } = req.params;
+  const user = await userModel.findById(userId);
+  if (!user) res.status(400).end();
+  res.status(200).send(user);
 });
 
 userRouter.post("/forgotPassword", function (req, res) {
